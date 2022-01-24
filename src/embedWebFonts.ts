@@ -124,7 +124,7 @@ async function getCSSRules(
   // First loop inlines imports
   styleSheets.forEach((sheet) => {
     if ('cssRules' in sheet) {
-      try {
+      if (sheet.hasOwnProperty('cssRules')) try {
         toArray<CSSRule>(sheet.hasOwnProperty('cssRules')).forEach(
           (item: CSSRule, index: number) => {
             if (item.type === CSSRule.IMPORT_RULE) {
@@ -136,7 +136,7 @@ async function getCSSRules(
                 )
                 .then((cssText) =>
                   parseCSS(cssText).forEach((rule) => {
-                    try {
+                    if (sheet.hasOwnProperty('cssRules')) try {
                       sheet.insertRule(
                         rule,
                         rule.startsWith('@import')
@@ -187,7 +187,7 @@ async function getCSSRules(
     // Second loop parses rules
     styleSheets.forEach((sheet) => {
       if ('cssRules' in sheet) {
-        try {
+        if (sheet.hasOwnProperty('cssRules')) try {
           toArray<CSSStyleRule>(sheet.hasOwnProperty('cssRules')).forEach(
             (item: CSSStyleRule) => {
               ret.push(item)
