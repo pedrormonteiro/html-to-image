@@ -9,5 +9,5 @@ yarn-error.log
 node_modules
 dist
 es
-lib
+# lib
 test/coverage
